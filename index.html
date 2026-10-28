@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="theme-color" content="#07090d"/>
+<title>Zticker S</title>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div id="gameWrap">
+<canvas id="game"></canvas>
+<div id="hud">
+  <div class="topHud">
+    <div class="fighterHud p1"><div class="nameLine"><span id="p1Name">VOLT</span><span class="tag">PLAYER 1</span></div><div class="hpShell"><div class="hp" id="p1hp"></div></div><div class="meter" id="p1meter"></div></div>
+    <div class="center"><div class="timer" id="timer">60</div><div class="round" id="roundText">ROUND 1</div><div class="roundDots" id="roundDots"></div></div>
+    <div class="fighterHud p2"><div class="nameLine"><span id="p2Name">RIFT</span><span class="tag" id="p2tag">CPU</span></div><div class="hpShell"><div class="hp" id="p2hp"></div></div><div class="meter" id="p2meter"></div></div>
+  </div>
+  <div id="banner">FIGHT!</div>
+  <div id="comboBox"><div class="comboN" id="comboN">3</div><div class="comboLabel">HIT COMBO</div><div class="damageText" id="damageText">24 DAMAGE</div></div>
+  <div id="status">A/D mover · W pular · S bloquear · J soco · K chute · L especial · Espaço super</div><button id="pauseMini" aria-label="Pausar">Ⅱ</button>
+</div>
+
+<div id="mobileControls">
+  <div class="pad"><div class="ctrl" data-key="left">◀</div><div class="ctrl" data-key="right">▶</div><div class="ctrl" data-key="jump">▲</div><div class="ctrl" data-key="block">◆</div></div>
+  <div class="actions"><div class="ctrl" data-key="punch">P</div><div class="ctrl" data-key="kick">K</div><div class="ctrl special" data-key="special">✦</div><div class="ctrl span2" data-key="dash">DASH</div><div class="ctrl super" data-key="super">★</div></div>
+</div>
+
+<div id="pauseCard"><h2>PAUSADO</h2><button class="btn primary" id="resumeBtn">CONTINUAR</button><button class="btn ghost" id="quitBtn">SAIR DA LUTA</button></div>
+
+<section class="screen" id="mainMenu"><div class="panel">
+  <div class="brandSmall">ORIGINAL STICKMAN FIGHTER</div><div class="logo">ZTICKER <span>S</span></div><div class="subtitle">Combate 2D rápido, responsivo e feito para navegador/mobile. Escolha seu lutador, domine combos e carregue o SUPER.</div>
+  <div class="menuGrid"><button class="btn primary" id="arcadeBtn">⚔ ARCADE vs CPU</button><button class="btn red" id="versusBtn">2 PLAYERS</button><button class="btn gold wide" id="trainingBtn">TRAINING MODE</button></div>
+  <div class="menuStats"><div class="statPill"><b>4</b><span>Lutadores</span></div><div class="statPill"><b>3</b><span>Arenas</span></div><div class="statPill"><b id="bestCombo">0</b><span>Melhor combo</span></div></div>
+</div></section>
+
+<section class="screen hidden" id="selectScreen"><div class="panel">
+  <div class="stepTitle">ESCOLHA O LUTADOR</div><div class="stepSub" id="selectSub">Player 1 — toque em um personagem.</div><div class="fighters" id="fighters"></div>
+  <div class="selectFooter"><button class="btn ghost" id="selectBack">VOLTAR</button><button class="btn primary" id="selectNext">PRÓXIMO</button></div>
+</div></section>
+
+<section class="screen hidden" id="arenaScreen"><div class="panel">
+  <div class="stepTitle">PREPARE A LUTA</div><div class="stepSub">Escolha a arena e a intensidade da CPU.</div><div class="arenaGrid" id="arenaGrid"></div>
+  <div class="difficulty" id="difficulty"><button class="chipBtn" data-diff="0.72">CASUAL</button><button class="chipBtn active" data-diff="1">NORMAL</button><button class="chipBtn" data-diff="1.25">HARD</button><button class="chipBtn" data-diff="1.55">NIGHTMARE</button></div>
+  <div class="selectFooter"><button class="btn ghost" id="arenaBack">VOLTAR</button><button class="btn red" id="fightBtn">FIGHT!</button></div>
+</div></section>
+</div>
+<script src="js/game.js"></script>
+</body>
+</html>
