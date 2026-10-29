@@ -3,49 +3,86 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"/>
-<meta name="theme-color" content="#07090d"/>
+<meta name="theme-color" content="#05070b"/>
+<meta name="screen-orientation" content="landscape"/>
 <title>Zticker S</title>
 <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <div id="gameWrap">
 <canvas id="game"></canvas>
+
+<div id="rotateLock" aria-live="polite">
+  <div class="rotateDevice">▰</div>
+  <strong>VIRE O CELULAR</strong>
+  <span>ZTICKER S é jogado obrigatoriamente na horizontal.</span>
+</div>
+
 <div id="hud">
   <div class="topHud">
-    <div class="fighterHud p1"><div class="nameLine"><span id="p1Name">VOLT</span><span class="tag">PLAYER 1</span></div><div class="hpShell"><div class="hp" id="p1hp"></div></div><div class="meter" id="p1meter"></div></div>
+    <div class="fighterHud p1">
+      <div class="nameLine"><span id="p1Name">VOLT</span><span class="tag">PLAYER 1</span></div>
+      <div class="hpShell"><div class="hp hp1" id="p1hp"></div></div>
+      <div class="guardShell"><span>GUARD</span><div class="guard" id="p1guard"></div></div>
+      <div class="meter" id="p1meter"></div>
+    </div>
     <div class="center"><div class="timer" id="timer">60</div><div class="round" id="roundText">ROUND 1</div><div class="roundDots" id="roundDots"></div></div>
-    <div class="fighterHud p2"><div class="nameLine"><span id="p2Name">RIFT</span><span class="tag" id="p2tag">CPU</span></div><div class="hpShell"><div class="hp" id="p2hp"></div></div><div class="meter" id="p2meter"></div></div>
+    <div class="fighterHud p2">
+      <div class="nameLine"><span id="p2Name">RIFT</span><span class="tag" id="p2tag">CPU</span></div>
+      <div class="hpShell"><div class="hp hp2" id="p2hp"></div></div>
+      <div class="guardShell"><span>GUARD</span><div class="guard" id="p2guard"></div></div>
+      <div class="meter" id="p2meter"></div>
+    </div>
   </div>
+  <div id="moveName">FLASH JAB</div>
+  <div id="guardCallout">PERFECT GUARD</div>
   <div id="banner">FIGHT!</div>
-  <div id="comboBox"><div class="comboN" id="comboN">3</div><div class="comboLabel">HIT COMBO</div><div class="damageText" id="damageText">24 DAMAGE</div></div>
-  <div id="status">A/D mover · W pular · S bloquear · J soco · K chute · L especial · Espaço super</div><button id="pauseMini" aria-label="Pausar">Ⅱ</button>
+  <div id="comboBox"><div class="comboN" id="comboN">3</div><div class="comboLabel">HIT CHAIN</div><div class="comboMove" id="comboMove">PHANTOM HOOK</div><div class="damageText" id="damageText">24 DAMAGE</div></div>
+  <div id="status"><b>M1</b> J · <b>M2</b> K · BLOQUEIO S · DASH SHIFT · ESPECIAL L · SUPER ESPAÇO</div>
+  <button id="pauseMini" aria-label="Pausar">Ⅱ</button>
 </div>
 
 <div id="mobileControls">
-  <div class="pad"><div class="ctrl" data-key="left">◀</div><div class="ctrl" data-key="right">▶</div><div class="ctrl" data-key="jump">▲</div><div class="ctrl" data-key="block">◆</div></div>
-  <div class="actions"><div class="ctrl" data-key="punch">P</div><div class="ctrl" data-key="kick">K</div><div class="ctrl special" data-key="special">✦</div><div class="ctrl span2" data-key="dash">DASH</div><div class="ctrl super" data-key="super">★</div></div>
+  <div class="pad">
+    <div class="ctrl move" data-key="left">◀</div><div class="ctrl move" data-key="right">▶</div>
+    <div class="ctrl jump" data-key="jump">▲</div><div class="ctrl guardBtn" data-key="block">GUARD</div>
+  </div>
+  <div class="actions">
+    <div class="ctrl attack m1" data-key="m1"><b>M1</b><small>FAST</small></div>
+    <div class="ctrl attack m2" data-key="m2"><b>M2</b><small>HEAVY</small></div>
+    <div class="ctrl special" data-key="special">✦<small>SKILL</small></div>
+    <div class="ctrl dash" data-key="dash">DASH</div>
+    <div class="ctrl super" data-key="super">★<small>SUPER</small></div>
+  </div>
 </div>
 
-<div id="pauseCard"><h2>PAUSADO</h2><button class="btn primary" id="resumeBtn">CONTINUAR</button><button class="btn ghost" id="quitBtn">SAIR DA LUTA</button></div>
+<div id="pauseCard"><div class="pauseKicker">ZTICKER S</div><h2>PAUSADO</h2><button class="btn primary" id="resumeBtn">CONTINUAR</button><button class="btn ghost" id="quitBtn">SAIR DA LUTA</button></div>
 
-<section class="screen" id="mainMenu"><div class="panel">
-  <div class="brandSmall">ORIGINAL STICKMAN FIGHTER</div><div class="logo">ZTICKER <span>S</span></div><div class="subtitle">Combate 2D rápido, responsivo e feito para navegador/mobile. Escolha seu lutador, domine combos e carregue o SUPER.</div>
-  <div class="menuGrid"><button class="btn primary" id="arcadeBtn">⚔ ARCADE vs CPU</button><button class="btn red" id="versusBtn">2 PLAYERS</button><button class="btn gold wide" id="trainingBtn">TRAINING MODE</button></div>
-  <div class="menuStats"><div class="statPill"><b>4</b><span>Lutadores</span></div><div class="statPill"><b>3</b><span>Arenas</span></div><div class="statPill"><b id="bestCombo">0</b><span>Melhor combo</span></div></div>
+<section class="screen" id="mainMenu"><div class="menuNoise"></div><div class="panel heroPanel">
+  <div class="heroCopy">
+    <div class="brandSmall">STICKMAN // ANIME-INSPIRED COMBAT</div>
+    <div class="logo">ZTICKER <span>S</span></div>
+    <div class="heroLine">STRIKE <i>·</i> BREAK <i>·</i> COUNTER</div>
+    <div class="subtitle">Combate 2D de stickmans com rotas M1/M2, cancelamento de golpes, perfect guard, counters e impacto cinematográfico.</div>
+    <div class="comboLegend"><span><b>M1×4</b> Dragon Breaker</span><span><b>M1 M1 M2</b> Thunder Knee</span><span><b>M2 M1 M2</b> Heaven Axe</span><span><b>GUARD → M1/M2</b> Reversal</span></div>
+  </div>
+  <div class="menuGrid"><button class="btn primary" id="arcadeBtn"><span>01</span> ARCADE <small>vs CPU</small></button><button class="btn red" id="versusBtn"><span>02</span> VERSUS <small>2 jogadores</small></button><button class="btn gold wide" id="trainingBtn"><span>03</span> TRAINING <small>domine as rotas</small></button></div>
+  <div class="menuStats"><div class="statPill"><b>4</b><span>Estilos</span></div><div class="statPill"><b>14+</b><span>Rotas de golpe</span></div><div class="statPill"><b id="bestCombo">0</b><span>Recorde combo</span></div></div>
 </div></section>
 
-<section class="screen hidden" id="selectScreen"><div class="panel">
-  <div class="stepTitle">ESCOLHA O LUTADOR</div><div class="stepSub" id="selectSub">Player 1 — toque em um personagem.</div><div class="fighters" id="fighters"></div>
+<section class="screen hidden" id="selectScreen"><div class="panel selectPanel">
+  <div class="stepKicker">FIGHTER SELECT</div><div class="stepTitle">ESCOLHA O LUTADOR</div><div class="stepSub" id="selectSub">PLAYER 1 // escolha seu estilo.</div><div class="fighters" id="fighters"></div>
   <div class="selectFooter"><button class="btn ghost" id="selectBack">VOLTAR</button><button class="btn primary" id="selectNext">PRÓXIMO</button></div>
 </div></section>
 
-<section class="screen hidden" id="arenaScreen"><div class="panel">
-  <div class="stepTitle">PREPARE A LUTA</div><div class="stepSub">Escolha a arena e a intensidade da CPU.</div><div class="arenaGrid" id="arenaGrid"></div>
+<section class="screen hidden" id="arenaScreen"><div class="panel selectPanel">
+  <div class="stepKicker">BATTLE SETUP</div><div class="stepTitle">PREPARE A LUTA</div><div class="stepSub">Arena, dificuldade e estilo de combate.</div><div class="arenaGrid" id="arenaGrid"></div>
   <div class="difficulty" id="difficulty"><button class="chipBtn" data-diff="0.72">CASUAL</button><button class="chipBtn active" data-diff="1">NORMAL</button><button class="chipBtn" data-diff="1.25">HARD</button><button class="chipBtn" data-diff="1.55">NIGHTMARE</button></div>
-  <div class="selectFooter"><button class="btn ghost" id="arenaBack">VOLTAR</button><button class="btn red" id="fightBtn">FIGHT!</button></div>
+  <div class="selectFooter"><button class="btn ghost" id="arenaBack">VOLTAR</button><button class="btn red fightBig" id="fightBtn">FIGHT!</button></div>
 </div></section>
 </div>
 <script src="js/core.js"></script>
+<script src="js/animation.js"></script>
 <script src="js/fighter.js"></script>
 <script src="js/controls.js"></script>
 <script src="js/combat.js"></script>
